@@ -22,81 +22,60 @@ let fs = require('fs');
 const OAuthToken = '';
 const accountId = '';
 
-
 //Recipient Information goes here
 const templateRoleName = ''; //IE: Signer 1
 const recipientName = '';
 const recipientEmail = '';
 const templateId = '';
 
-
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-
-
-
-
-
-
 
 app.get('/', function (req, res) {
-	
-
-apiClient.setBasePath('https://demo.docusign.net/restapi');
-apiClient.addDefaultHeader('Authorization', 'Bearer ' + OAuthToken);
 
 
+  apiClient.setBasePath('https://demo.docusign.net/restapi');
+  apiClient.addDefaultHeader('Authorization', 'Bearer ' + OAuthToken);
 
-// Envelope Code goes here
+  // Envelope Code goes here
 
+  docusign.Configuration.default.setDefaultApiClient(apiClient);
 
+  let envDef = new docusign.EnvelopeDefinition();
 
-docusign.Configuration.default.setDefaultApiClient(apiClient);
+  //Set the Email Subject line and email message
+  envDef.emailSubject = 'Please sign this document sent from Node SDK';
+  envDef.emailBlurb = 'Please sign this document sent from the DocuSign Node.JS SDK.'
 
-let envDef = new docusign.EnvelopeDefinition();
+  envDef.templateId = templateId;
 
-//Set the Email Subject line and email message
-envDef.emailSubject = 'Please sign this document sent from Node SDK';
-envDef.emailBlurb = 'Please sign this document sent from the DocuSign Node.JS SDK.'
+  let signer1TemplateRole = new docusign.TemplateRole();
+  signer1TemplateRole.roleName = templateRoleName;
+  signer1TemplateRole.email = recipientEmail;
+  signer1TemplateRole.name = recipientName;
 
-envDef.templateId = templateId;
+  let templateRoleArray = [];
+  templateRoleArray.push(signer1TemplateRole);
 
+  let templateRecipients = new docusign.TemplateRecipients;
+  templateRecipients = templateRoleArray;
 
-let signer1TemplateRole = new docusign.TemplateRole();
-signer1TemplateRole.roleName = templateRoleName;
-signer1TemplateRole.email = recipientEmail;
-signer1TemplateRole.name = recipientName;
+  envDef.templateRoles = templateRecipients;
 
-let templateRoleArray = [];
-templateRoleArray.push(signer1TemplateRole);
+  //Envelope status for drafts is created, set to sent if wanting to send the envelope right away
+  envDef.status = 'sent';
 
-let templateRecipients = new docusign.TemplateRecipients;
-templateRecipients = templateRoleArray;
+  //Send the envelope
+  let envelopesApi = new docusign.EnvelopesApi();
+  envelopesApi.createEnvelope(accountId, { 'envelopeDefinition': envDef }, function (err, envelopeSummary, response) {
 
+    if (err)
+      console.log(err);
 
-envDef.templateRoles = templateRecipients;
+    res.send(envelopeSummary);
 
-//Envelope status for drafts is created, set to sent if wanting to send the envelope right away
-envDef.status = 'sent';
-
-
-//Send the envelope
-let envelopesApi = new docusign.EnvelopesApi();
-envelopesApi.createEnvelope(accountId, {'envelopeDefinition': envDef}, function (err, envelopeSummary, response) {
-
-
-if(err)
-	console.log(err);
-
-
-res.send(envelopeSummary);
-
+  });
 });
-
-
-});
-
-
 
 app.listen(port, host, function (err) {
   if (err)
