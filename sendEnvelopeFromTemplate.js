@@ -16,7 +16,7 @@ let fs = require('fs');
 
 //Fill in Variables Here
 
-//Obtain an OAuth token from https://developers.hqtest.tst/oauth-token-generator
+//Obtain an OAuth token from https://developers.docusign.com/oauth-token-generator
 //Obtain your accountId from account-d.docusign.com > Go To Admin > API and Keys
 
 const OAuthToken = '';
