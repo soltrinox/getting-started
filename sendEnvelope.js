@@ -37,7 +37,8 @@ app.get('/', function (req, res) {
   apiClient.setBasePath('https://demo.docusign.net/restapi');
   apiClient.addDefaultHeader('Authorization', 'Bearer ' + OAuthToken);
 
-  // Envelope Code goes here
+  // *** Begin envelope creation ***
+  
 
   //Read the file you wish to send from the local machine.
   fileStream = process.argv[2];
@@ -105,6 +106,9 @@ app.get('/', function (req, res) {
   //Then add the recipients object to the enevelope definitions
   envDef.recipients = recipients;
 
+  // *** End envelope creation ***
+  
+  
   //Send the envelope
   var envelopesApi = new docusign.EnvelopesApi();
   envelopesApi.createEnvelope(accountId, { 'envelopeDefinition': envDef }, function (err, envelopeSummary, response) {

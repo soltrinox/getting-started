@@ -37,7 +37,8 @@ app.get('/', function (req, res) {
   apiClient.setBasePath('https://demo.docusign.net/restapi');
   apiClient.addDefaultHeader('Authorization', 'Bearer ' + OAuthToken);
 
-  // Envelope Code goes here
+  // *** Begin envelope creation ***
+  
 
   docusign.Configuration.default.setDefaultApiClient(apiClient);
 
@@ -65,6 +66,9 @@ app.get('/', function (req, res) {
   //Envelope status for drafts is created, set to sent if wanting to send the envelope right away
   envDef.status = 'sent';
 
+  // *** End envelope creation ***
+
+  
   //Send the envelope
   let envelopesApi = new docusign.EnvelopesApi();
   envelopesApi.createEnvelope(accountId, { 'envelopeDefinition': envDef }, function (err, envelopeSummary, response) {
