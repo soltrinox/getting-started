@@ -28,7 +28,7 @@ const recipientName = '';
 const recipientEmail = '';
 
 //Point this to the document you wish to send's location on the local machine. Default location is __workingDir\fileName
-const fileName = ''; //IE: test.pdf
+const fileName = 'docs/House.pdf'; //IE: test.pdf
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 

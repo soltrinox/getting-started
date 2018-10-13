@@ -74,3 +74,6 @@ typings/
 
 # IntelliJ IDE
 .idea
+
+# npm lock file
+package-lock.json
