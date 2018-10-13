@@ -1,11 +1,11 @@
 const express = require('express');
 const docusign = require('docusign-esign');
-const path = require('path');
 const apiClient = new docusign.ApiClient();
 const app = express();
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
-let fs = require('fs');
+
+
 
 
 //On execution an envelope is sent to the provided email address, one signHere
@@ -73,8 +73,9 @@ app.get('/', function (req, res) {
   let envelopesApi = new docusign.EnvelopesApi();
   envelopesApi.createEnvelope(accountId, { 'envelopeDefinition': envDef }, function (err, envelopeSummary, response) {
 
-    if (err)
-      console.log(err);
+    if (err) {
+      return res.send('Error while creating a DocuSign envelope:' + err);
+    }
 
     res.send(envelopeSummary);
 
@@ -82,8 +83,9 @@ app.get('/', function (req, res) {
 });
 
 app.listen(port, host, function (err) {
-  if (err)
-    throw err;
+  if (err) {
+    return res.send('Error while starting the server:' + err);
+  }
 
   console.log('Your server is running on http://' + host + ':' + port + '.');
 });
