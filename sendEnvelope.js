@@ -114,7 +114,7 @@ app.get('/', function (req, res) {
   envelopesApi.createEnvelope(accountId, { 'envelopeDefinition': envDef }, function (err, envelopeSummary, response) {
 
     if (err) {
-      res.send('Error while sending a DocuSign envelope:' + err);
+      return res.send('Error while sending a DocuSign envelope:' + err);
     }
 
     res.send(envelopeSummary);
@@ -124,7 +124,7 @@ app.get('/', function (req, res) {
 
 app.listen(port, host, function (err) {
   if (err) {
-    res.send('Error while starting the server:' + err);
+    return res.send('Error while starting the server:' + err);
   }
 
   console.log('Your server is running on http://' + host + ':' + port + '.');

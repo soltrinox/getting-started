@@ -115,7 +115,7 @@ app.get('/', function (req, res) {
   envelopesApi.createEnvelope(accountId, { 'envelopeDefinition': envDef }, function (err, envelopeSummary, response) {
 
     if (err) {
-      res.send('Error while creating a DocuSign envelope:' + err);
+      return res.send('Error while creating a DocuSign envelope:' + err);
     }
     //Set envelopeId the envelopeId that was just created
     let envelopeId = envelopeSummary.envelopeId;
@@ -137,7 +137,7 @@ app.get('/', function (req, res) {
     envelopesApi.createRecipientView(accountId, envelopeId, { recipientViewRequest: recipientViewRequest }, function (err, recipientViewResults, response) {
 
       if (err) {
-        res.send('Error while creating a DocuSign recipient view:' + err);
+        return res.send('Error while creating a DocuSign recipient view:' + err);
       }
 
       //Set the signingUrl variable to the link returned from the CreateRecipientView request
@@ -158,7 +158,7 @@ app.get('/dsreturn', function (req, res) {
 
 app.listen(port, host, function (err) {
   if (err) {
-    res.send('Error while starting the server:' + err);
+    return res.send('Error while starting the server:' + err);
   }
 
   console.log('Your server is running on http://' + host + ':' + port + '.');
