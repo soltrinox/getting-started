@@ -5,7 +5,7 @@ const apiClient = new docusign.ApiClient();
 const app = express();
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
-let fs = require('fs');
+const fs = require('fs');
 
 //On execution an envelope is sent to the provided email address, one signHere
 //tab is added, the document supplied in workingdirectory\fileName is used.
@@ -114,8 +114,9 @@ app.get('/', function (req, res) {
   let envelopesApi = new docusign.EnvelopesApi();
   envelopesApi.createEnvelope(accountId, { 'envelopeDefinition': envDef }, function (err, envelopeSummary, response) {
 
-    if (err)
-      throw err;
+    if (err) {
+      res.send('Error while creating a DocuSign envelope:' + err);
+    }
     //Set envelopeId the envelopeId that was just created
     let envelopeId = envelopeSummary.envelopeId;
 
@@ -135,6 +136,10 @@ app.get('/', function (req, res) {
     //Make the request for a recipient view
     envelopesApi.createRecipientView(accountId, envelopeId, { recipientViewRequest: recipientViewRequest }, function (err, recipientViewResults, response) {
 
+      if (err) {
+        res.send('Error while creating a DocuSign recipient view:' + err);
+      }
+
       //Set the signingUrl variable to the link returned from the CreateRecipientView request
       let signingUrl = recipientViewResults.url;
 
@@ -152,8 +157,9 @@ app.get('/dsreturn', function (req, res) {
 });
 
 app.listen(port, host, function (err) {
-  if (err)
-    throw err;
+  if (err) {
+    res.send('Error while starting the server:' + err);
+  }
 
   console.log('Your server is running on http://' + host + ':' + port + '.');
 });
