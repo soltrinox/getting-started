@@ -131,7 +131,7 @@ app.get('/', function (req, res) {
     recipientViewRequest.email = recipientEmail;
 
     //Create the variable used to handle the response
-    recipientViewresults = docusign.ViewLinkRequest();
+    recipientViewResults = docusign.ViewLinkRequest();
 
     //Make the request for a recipient view
     envelopesApi.createRecipientView(accountId, envelopeId, { recipientViewRequest: recipientViewRequest }, function (err, recipientViewResults, response) {
