@@ -4,7 +4,7 @@ const path = require('path');
 const apiClient = new docusign.ApiClient();
 const app = express();
 const port = process.env.PORT || 7011;
-const host = process.env.HOST || 'localhost';
+const host = process.env.HOST || 'aichart.io';
 const fs = require('fs');
 
 //On execution an envelope is sent to the provided email address, one signHere
