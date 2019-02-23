@@ -18,16 +18,16 @@ const fs = require('fs');
 //Obtain an OAuth token from https://developers.docusign.com/oauth-token-generator
 //Obtain your accountId from account-d.docusign.com > Go To Admin > API and Keys
 
-const OAuthToken = '';
-const accountId = '';
+const OAuthToken = 'eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQoAAAABAAUABwAAmcYD05nWSAgAANnpERaa1kgCAM967m71oilDvkz60H3HM44VAAEAAAAYAAEAAAAFAAAADQAkAAAAZjBmMjdmMGUtODU3ZC00YTcxLWE0ZGEtMzJjZWNhZTNhOTc4EgABAAAACwAAAGludGVyYWN0aXZlMACAAi4D05nWSDcApdwvXc9uy0KcQ6gXVmoJrw.JHoAdxMSxSsuMeaCzCJeC2KvODo4RmVQBtubrSCWtyTs4oL3lcOUoTU1RzJCStzeYn_hc3Wum13F481iLoHcewJZrLYjJbpDrOghsEkUoLNh2Vb8rejmjscEemxXzDPgjVs2etyU4L9JIqZpicbwTHmdPQYKyBR7TleGYiFP5ocfTaSQEwwR4fVJ0umeFnX6huM-Nd-kXT160SKygbSDkOG6nVduk9MAHzKKGvOhWbNrEgopLUWFS-WCrvCdpZH0wvNBA9plZABs6K7QYu9uqpD1ZgOhJXmKzDlBNuCa8kxHwxAvr-V7BD2Nhnc6lDTkfPAv9a0LEL3MbTvjQR7K1A';
+const accountId = '3da03605-3ad5-450c-9ff7-e127c7e20b25';
 
 
 //Recipient Information goes here
-const recipientName = '';
-const recipientEmail = '';
+const recipientName = 'Dylan Rosario';
+const recipientEmail = 'me@dylanrosario.com';
 
 //Point this to the document you wish to send's location on the local machine. Default location is __workingDir\fileName
-const fileName = 'docs/House.pdf';
+const fileName = 'invest001.pdf';
 
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
