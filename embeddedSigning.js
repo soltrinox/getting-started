@@ -126,7 +126,7 @@ app.get('/', function (req, res) {
     recipientViewRequest.authenticationMethod = 'email';
     recipientViewRequest.clientUserId = '123';
     recipientViewRequest.recipientId = '1';
-    recipientViewRequest.returnUrl = 'https://aichart.io/';
+    recipientViewRequest.returnUrl = 'https://aichart.io/airsygn';
     recipientViewRequest.userName = recipientName;
     recipientViewRequest.email = recipientEmail;
 
